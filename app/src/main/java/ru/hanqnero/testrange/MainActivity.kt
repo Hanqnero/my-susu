@@ -19,7 +19,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import ru.hanqnero.testrange.ui.theme.TestrangeTheme
+import ru.hanqnero.testrange.ui.theme.*
+import kotlin.reflect.KClass
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,16 +34,6 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-
-    private fun navigateToPassActivity() {
-        val intent = Intent(this, PassActivity::class.java)
-        startActivity(intent)
-    }
-
-
-    val GAP_SMALL = 6.dp
-    val GAP_MED = 8.dp
-    val GAP_BIG = 12.dp
 
     @Composable
     fun SubSectionTitle(text: String) {
@@ -70,6 +61,7 @@ class MainActivity : ComponentActivity() {
         text: String,
         onClick: () -> Unit = { },
         modifier: Modifier,
+        color: Color = Pink40,
     ) {
         Button(
             modifier = modifier
@@ -84,8 +76,9 @@ class MainActivity : ComponentActivity() {
                 contentAlignment = Alignment.TopStart,
             ) {
                 Surface(
-                    color = Color(0xFF4E4195),
-                    modifier = Modifier.fillMaxSize()
+                    color = color,
+                    modifier = Modifier.fillMaxSize(),
+
                 ) {}
                 Text(
                     modifier = Modifier.padding(GAP_SMALL),
@@ -114,23 +107,25 @@ class MainActivity : ComponentActivity() {
                 Column(
                     modifier = Modifier
                         .weight(1f)
-//                    .padding(end = 0.dp)
                         .fillMaxHeight(),
-//                verticalArrangement = Arrangement.spacedBy(GAP_SMALL),
                 ) {
-                    SquareMenuButton("Загруженность", modifier = Modifier.weight(0.5f))
+                    SquareMenuButton("Загруженность", modifier = Modifier.weight(0.5f), color = Green50)
                     SquareMenuButton("Парковка", modifier = Modifier.weight(0.5f))
                 }
                 Column(
                     modifier = Modifier
                         .weight(1f)
-//                    .padding(start = GAP_SMALL)
                         .fillMaxHeight()
                 ) {
-                    SquareMenuButton("Турникет", modifier = Modifier.weight(0.5f), onClick = { navigateToPassActivity() })
+                    SquareMenuButton("Турникет", modifier = Modifier.weight(0.5f), onClick = { navigateToPassActivity(PassActivity::class) })
                 }
             }
         }
+    }
+
+    private fun navigateToPassActivity(cls: KClass<*>) {
+        val intent = Intent(this, cls::class.java)
+        startActivity(intent)
     }
 
     @Composable
@@ -146,12 +141,9 @@ class MainActivity : ComponentActivity() {
                     .heightIn(max = 80.dp, min = 50.dp)
                     .fillMaxWidth(),
             ) {
-                SquareMenuButton(
-                    "Расписание",
-                    modifier = Modifier
-                        .weight(1f)
+                SquareMenuButton("Расписание", modifier = Modifier.weight(1f), color = PurpleSched
                 )
-                SquareMenuButton("БРС", modifier = Modifier.weight(1f))
+                SquareMenuButton("БРС", modifier = Modifier.weight(1f), color = PurpleGrades)
             }
         }
     }
@@ -185,9 +177,7 @@ class MainActivity : ComponentActivity() {
             modifier = Modifier
                 .fillMaxSize()
                 .padding(GAP_BIG * 2)
-                .padding(top = GAP_BIG * 2)
         ) {
-
             SectionTitle("Сервисы")
             CampusBlock()
             AdministrativeBlock()

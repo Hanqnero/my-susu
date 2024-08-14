@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">testrange</string>
+    <string name="app_name">Мой ЮУрГУ</string>
+    <string name="title_activity_grades">Grades</string>
 </resources>

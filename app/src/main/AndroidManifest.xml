@@ -13,6 +13,11 @@
             android:theme="@style/Theme.Testrange"
             tools:targetApi="31">
         <activity
+                android:name=".Grades"
+                android:exported="false"
+                android:label="@string/title_activity_grades"
+                android:theme="@style/Theme.Testrange"/>
+        <activity
                 android:name=".MainActivity"
                 android:exported="true"
                 android:label="@string/app_name"
