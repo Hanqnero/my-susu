@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Мой ЮУрГУ</string>
     <string name="title_activity_grades">Grades</string>
+    <string name="title_activity_coming_soon">ComingSoon</string>
 </resources>

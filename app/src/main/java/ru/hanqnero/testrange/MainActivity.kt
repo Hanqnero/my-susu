@@ -6,21 +6,20 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.Gray
+import androidx.compose.ui.graphics.Color.Companion.White
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import ru.hanqnero.testrange.ui.theme.*
-import kotlin.reflect.KClass
+import ru.hanqnero.testrange.ui.theme.TestrangeTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,6 +33,22 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+
+
+    private fun navigateToPassActivity() {
+        val intent = Intent(this, PassActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun navigateToComingActivity() {
+        val intent = Intent(this, ComingActivity::class.java)
+        startActivity(intent)
+    }
+
+
+    val GAP_SMALL = 6.dp
+    val GAP_MED = 8.dp
+    val GAP_BIG = 12.dp
 
     @Composable
     fun SubSectionTitle(text: String) {
@@ -61,7 +76,6 @@ class MainActivity : ComponentActivity() {
         text: String,
         onClick: () -> Unit = { },
         modifier: Modifier,
-        color: Color = Pink40,
     ) {
         Button(
             modifier = modifier
@@ -76,9 +90,8 @@ class MainActivity : ComponentActivity() {
                 contentAlignment = Alignment.TopStart,
             ) {
                 Surface(
-                    color = color,
-                    modifier = Modifier.fillMaxSize(),
-
+                    color = Color(0xFF4E4195),
+                    modifier = Modifier.fillMaxSize()
                 ) {}
                 Text(
                     modifier = Modifier.padding(GAP_SMALL),
@@ -98,7 +111,7 @@ class MainActivity : ComponentActivity() {
                 modifier = Modifier
                     .height(GAP_BIG * 3),
             )
-            SubSectionTitle("Кампус")
+            SubSectionTitle("Избранное")
             Row(
                 modifier = Modifier
                     .heightIn(max = 140.dp, min = 100.dp)
@@ -107,25 +120,33 @@ class MainActivity : ComponentActivity() {
                 Column(
                     modifier = Modifier
                         .weight(1f)
+//                    .padding(end = 0.dp)
                         .fillMaxHeight(),
+//                verticalArrangement = Arrangement.spacedBy(GAP_SMALL),
                 ) {
-                    SquareMenuButton("Загруженность", modifier = Modifier.weight(0.5f), color = Green50)
-                    SquareMenuButton("Парковка", modifier = Modifier.weight(0.5f))
+                    SquareMenuButton(
+                        "Коворкинги", modifier = Modifier.weight(0.5f),
+                        onClick = { navigateToComingActivity() }
+                    )
+                    SquareMenuButton(
+                        "Парковка",
+                        modifier = Modifier.weight(0.5f),
+                        onClick = { navigateToComingActivity() }
+                    )
                 }
                 Column(
                     modifier = Modifier
                         .weight(1f)
+//                    .padding(start = GAP_SMALL)
                         .fillMaxHeight()
                 ) {
-                    SquareMenuButton("Турникет", modifier = Modifier.weight(0.5f), onClick = { navigateToPassActivity(PassActivity::class) })
+                    SquareMenuButton(
+                        "Турникет",
+                        modifier = Modifier.weight(0.5f),
+                        onClick = { navigateToPassActivity() })
                 }
             }
         }
-    }
-
-    private fun navigateToPassActivity(cls: KClass<*>) {
-        val intent = Intent(this, cls::class.java)
-        startActivity(intent)
     }
 
     @Composable
@@ -141,9 +162,12 @@ class MainActivity : ComponentActivity() {
                     .heightIn(max = 80.dp, min = 50.dp)
                     .fillMaxWidth(),
             ) {
-                SquareMenuButton("Расписание", modifier = Modifier.weight(1f), color = PurpleSched
+                SquareMenuButton(
+                    "Расписание",
+                    modifier = Modifier.weight(1f),
+                    onClick = { navigateToComingActivity() }
                 )
-                SquareMenuButton("БРС", modifier = Modifier.weight(1f), color = PurpleGrades)
+                SquareMenuButton("БРС", modifier = Modifier.weight(1f))
             }
         }
     }
@@ -172,16 +196,84 @@ class MainActivity : ComponentActivity() {
 
 
     @Composable
-    fun MainMenuView() {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(GAP_BIG * 2)
+    fun BottomBar() { //a row of button oobjects
+        BottomAppBar(
+            // Фон и высота панели
+            modifier = Modifier.height(56.dp),
+            containerColor = White
         ) {
-            SectionTitle("Сервисы")
-            CampusBlock()
-            AdministrativeBlock()
-            CommunicationBlock()
+            // Содержимое панели
+            Row( //строка нижней панели
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                IconButton(onClick = { /*TODO: Действие для брс кнопки */ }) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.hat),
+                        contentDescription = "БРС",
+                        tint = Gray
+                    )
+                }
+                IconButton(onClick = { navigateToComingActivity() }) {
+                    Icon(
+                        //TODO: imageVector = Icons.Default.Search,
+                        painter = painterResource(id = R.drawable.flash),
+                        contentDescription = "Последние новости",
+                        tint = Gray
+                    )
+                }
+                IconButton(onClick = { navigateToComingActivity() }) {
+                    Icon(
+                        //TODO: imageVector = Icons.Default.AccountCircle,
+                        painter = painterResource(id = R.drawable.schedule),
+                        contentDescription = "Расписание",
+                        tint = Gray
+                    )
+                }
+                IconButton(onClick = {
+                    // Переход на домашнюю страницу при нажатии на иконку
+                }) {
+                    Icon(
+                        //TODO: imageVector = Icons.Default.AccountCircle,
+                        painter = painterResource(id = R.drawable.homepage_icon),
+                        contentDescription = "Домашняя страница",
+                        tint = Gray
+                    )
+                }
+            }
+        }
+    }
+
+    @Composable
+    fun MainMenuView() {
+        TestrangeTheme {
+            Scaffold(
+                bottomBar = {
+                    BottomBar()
+                }
+            ) { paddingValues ->
+                // Основное содержимое приложения
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(paddingValues)
+                ) {
+
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(GAP_BIG * 2)
+                            .padding(top = GAP_BIG * 2)
+                    ) {
+
+                        SectionTitle("Сервисы")
+                        CampusBlock()
+                        AdministrativeBlock()
+                        CommunicationBlock()
+                    }
+                }
+            }
         }
     }
 
@@ -193,3 +285,4 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
