@@ -1,4 +1,4 @@
-package ru.hanqnero.testrange
+package ru.hanqnero.mysusu
 
 import android.content.Intent
 import android.os.Bundle
@@ -19,7 +19,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import ru.hanqnero.testrange.ui.theme.TestrangeTheme
+import ru.hanqnero.mysusu.ui.theme.TestrangeTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,6 +34,10 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    private fun navigateToGrades() {
+        val intent = Intent(this, Grades::class.java)
+        startActivity(intent)
+    }
 
     private fun navigateToPassActivity() {
         val intent = Intent(this, PassActivity::class.java)
@@ -90,7 +94,7 @@ class MainActivity : ComponentActivity() {
                 contentAlignment = Alignment.TopStart,
             ) {
                 Surface(
-                    color = Color(0xFF4E4195),
+                    color = Color(0xFF004394),
                     modifier = Modifier.fillMaxSize()
                 ) {}
                 Text(
@@ -98,7 +102,7 @@ class MainActivity : ComponentActivity() {
                     text = text,
                     style = MaterialTheme.typography.titleMedium,
                     textAlign = TextAlign.Left,
-                    maxLines = 1,
+                    maxLines = 3,
                 )
             }
         }
@@ -167,7 +171,9 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.weight(1f),
                     onClick = { navigateToComingActivity() }
                 )
-                SquareMenuButton("БРС", modifier = Modifier.weight(1f))
+                SquareMenuButton("БРС", modifier = Modifier.weight(1f), onClick = {
+                    navigateToGrades()
+                })
             }
         }
     }
@@ -183,11 +189,11 @@ class MainActivity : ComponentActivity() {
                 .fillMaxWidth(),
         ) {
             Column(modifier = Modifier.weight(1f)) {
-                SquareMenuButton("", modifier = Modifier.weight(1f))
+                SquareMenuButton("Big\nBlue\nButton", modifier = Modifier.weight(1f), onClick = {navigateToComingActivity()})
             }
             Column(modifier = Modifier.weight(1f)) {
-                SquareMenuButton("", modifier = Modifier.weight(1f))
-                SquareMenuButton("", modifier = Modifier.weight(1f))
+                SquareMenuButton("Чат", modifier = Modifier.weight(1f), onClick = {navigateToComingActivity()})
+                SquareMenuButton("FAQ", modifier = Modifier.weight(1f), onClick = {navigateToComingActivity()})
 
             }
 
@@ -208,7 +214,7 @@ class MainActivity : ComponentActivity() {
                 horizontalArrangement = Arrangement.SpaceEvenly,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                IconButton(onClick = { /*TODO: Действие для брс кнопки */ }) {
+                IconButton(onClick = { navigateToGrades() }) {
                     Icon(
                         painter = painterResource(id = R.drawable.hat),
                         contentDescription = "БРС",

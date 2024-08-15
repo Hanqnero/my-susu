@@ -1,4 +1,4 @@
-package ru.hanqnero.testrange
+package ru.hanqnero.mysusu
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,36 +7,46 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
-import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Gray
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import ru.hanqnero.testrange.ui.theme.TestrangeTheme
+import ru.hanqnero.mysusu.ui.theme.TestrangeTheme
 
-class ComingActivity : ComponentActivity() {
+class PassActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             TestrangeTheme {
-                Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-                    ComingSoonView()
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    qrCode()
                 }
             }
         }
     }
 
+    // Перемещаем функцию внутрь класса, чтобы использовать `this` для контекста
     private fun navigateToMainActivity() {
         val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun navigateToComingActivity() {
+        val intent = Intent(this, ComingActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun navigateToGrades() {
+        val intent = Intent(this, Grades::class.java)
         startActivity(intent)
     }
 
@@ -48,29 +58,27 @@ class ComingActivity : ComponentActivity() {
             containerColor = White
         ) {
             // Содержимое панели
-            Row( //строка нижней панели
+            Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceEvenly,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                IconButton(onClick = { /* Действие для брс кнопки */ }) {
+                IconButton(onClick = { navigateToGrades() }) {
                     Icon(
                         painter = painterResource(id = R.drawable.hat),
                         contentDescription = "БРС",
                         tint = Gray
                     )
                 }
-                IconButton(onClick = { /* Действие для новостей */ }) {
+                IconButton(onClick = { navigateToComingActivity() }) {
                     Icon(
-                        //TODO: imageVector = Icons.Default.Search,
                         painter = painterResource(id = R.drawable.flash),
                         contentDescription = "Последние новости",
                         tint = Gray
                     )
                 }
-                IconButton(onClick = { /* Действие для профиля */ }) {
+                IconButton(onClick = { navigateToComingActivity() }) {
                     Icon(
-                        //TODO: imageVector = Icons.Default.AccountCircle,
                         painter = painterResource(id = R.drawable.schedule),
                         contentDescription = "Расписание",
                         tint = Gray
@@ -78,7 +86,6 @@ class ComingActivity : ComponentActivity() {
                 }
                 IconButton(onClick = { navigateToMainActivity() }) {
                     Icon(
-                        //TODO: imageVector = Icons.Default.AccountCircle,
                         painter = painterResource(id = R.drawable.homepage_icon),
                         contentDescription = "Домашняя страница",
                         tint = Gray
@@ -89,47 +96,46 @@ class ComingActivity : ComponentActivity() {
     }
 
     @Composable
-    fun ComingSoonView() {
-        Scaffold(
-            bottomBar = {
-                BottomBar()
-            }
-        ) {
-            Box(
-                modifier = Modifier.fillMaxSize()
-            ) {
-                // Помещаем изображение в Box
-                Image(
-                    painter = painterResource(id = R.drawable.susu),
-                    contentDescription = "susu logo",
-                    colorFilter = ColorFilter.tint(Color.LightGray), // Изменение цвета изображения
+    fun qrCode() {
+        TestrangeTheme {
+            Scaffold(
+                bottomBar = {
+                    BottomBar()
+                }
+            ) { paddingValues ->
+                Box(
                     modifier = Modifier
-                        .size(350.dp)
-                        .align(Alignment.Center) // Центрирование изображения в Box
-                )
-
-                // Содержимое экрана
-                Text(
-                    text = "В процессе разработки",
-                    modifier = Modifier
-                        .align(Alignment.TopCenter) // Центрирование текста в Box
-                        .padding(16.dp).padding(top = 120.dp),
-                    style = TextStyle(
-                        fontSize = 40.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color(0xFF767676),
-                        textAlign = TextAlign.Center
-                    )
-                )
+                        .fillMaxSize()
+                        .padding(paddingValues)
+                ) {
+                    Column(
+                        modifier = Modifier
+                            .align(Alignment.TopCenter)
+                            .padding(top = 150.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.qr),
+                            contentDescription = "QR code",
+                            modifier = Modifier.size(350.dp)
+                        )
+                        Spacer(modifier = Modifier.height(18.dp))
+                        Text(
+                            text = "Прибылов Артемий МЕН-230206",
+                            textAlign = TextAlign.Center,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+                }
             }
         }
     }
 
-    @Preview(showSystemUi = true)
+    @Preview(showBackground = true)
     @Composable
-    fun MainMenuViewPreview() {
+    fun GreetingPreview() {
         TestrangeTheme {
-            ComingSoonView()
+            qrCode()
         }
     }
 }

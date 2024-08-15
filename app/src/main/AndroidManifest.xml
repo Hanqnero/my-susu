@@ -13,7 +13,12 @@
             android:theme="@style/Theme.Testrange"
             tools:targetApi="31">
         <activity
-                android:name=".ComingSoon"
+                android:name=".ComingActivity"
+                android:exported="false"
+                android:label="@string/title_activity_coming_soon"
+                android:theme="@style/Theme.Testrange"/>
+        <activity
+                android:name=".PassActivity"
                 android:exported="false"
                 android:label="@string/title_activity_coming_soon"
                 android:theme="@style/Theme.Testrange"/>

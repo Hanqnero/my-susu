@@ -1,4 +1,4 @@
-package ru.hanqnero.testrange.ui.theme
+package ru.hanqnero.mysusu.ui.theme
 
 import android.app.Activity
 import android.os.Build
