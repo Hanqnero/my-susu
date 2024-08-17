@@ -7,3 +7,5 @@
 /dataSources/
 /dataSources.local.xml
 /vcs.xml
+/.name
+/inspectionProfiles/Project_Default.xml
