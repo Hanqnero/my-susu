@@ -1,4 +1,4 @@
-package ru.hanqnero.testrange.ui.theme
+package ru.hanqnero.mysusu.ui.theme
 
 import android.app.Activity
 import android.os.Build
@@ -40,7 +40,7 @@ val GAP_SMALL = 6.dp
 val GAP_BIG = 12.dp
 
 @Composable
-fun TestrangeTheme(
+fun MySusuTheme(
     darkTheme: Boolean = false,
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,

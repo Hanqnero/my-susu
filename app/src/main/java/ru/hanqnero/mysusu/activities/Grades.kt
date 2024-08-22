@@ -1,4 +1,4 @@
-package ru.hanqnero.testrange
+package ru.hanqnero.mysusu.activities
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -20,14 +20,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import ru.hanqnero.testrange.ui.theme.GAP_BIG
-import ru.hanqnero.testrange.ui.theme.TestrangeTheme
+import ru.hanqnero.mysusu.ui.theme.GAP_BIG
+import ru.hanqnero.mysusu.ui.theme.MySusuTheme
 
 class Grades : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            TestrangeTheme {
+            MySusuTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
                     GradesRow("Test", 56)
@@ -114,11 +114,11 @@ fun SectionTitle(text: String) {
 @Preview(showSystemUi = true)
 @Composable
 fun GreetingPreview2() {
-    TestrangeTheme {
+    MySusuTheme {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(GAP_BIG*2)
+                .padding(GAP_BIG *2)
                 .padding()
                 .verticalScroll(rememberScrollState()),
         ) {

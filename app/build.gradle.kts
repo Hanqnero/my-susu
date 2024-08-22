@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "ru.hanqnero.testrange"
+    namespace = "ru.hanqnero.mysusu"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "ru.hanqnero.testrange"
+        applicationId = "ru.hanqnero.mysusu"
         minSdk = 30
         targetSdk = 34
         versionCode = 1

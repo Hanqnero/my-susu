@@ -1,4 +1,4 @@
-package ru.hanqnero.testrange.ui.theme
+package ru.hanqnero.mysusu.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

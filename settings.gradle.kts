@@ -13,6 +13,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "testrange"
+rootProject.name = "mysusu"
 include(":app")
  

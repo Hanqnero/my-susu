@@ -1,4 +1,4 @@
-package ru.hanqnero.testrange
+package ru.hanqnero.mysusu.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -19,13 +19,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import ru.hanqnero.testrange.ui.theme.TestrangeTheme
+import ru.hanqnero.mysusu.R
+import ru.hanqnero.mysusu.ui.theme.MySusuTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            TestrangeTheme {
+            MySusuTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
                     MainMenuView()
@@ -46,9 +47,9 @@ class MainActivity : ComponentActivity() {
     }
 
 
-    val GAP_SMALL = 6.dp
-    val GAP_MED = 8.dp
-    val GAP_BIG = 12.dp
+    private val GAP_SMALL = 6.dp
+    private val GAP_MED = 8.dp
+    private val GAP_BIG = 12.dp
 
     @Composable
     fun SubSectionTitle(text: String) {
@@ -247,7 +248,7 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun MainMenuView() {
-        TestrangeTheme {
+        MySusuTheme {
             Scaffold(
                 bottomBar = {
                     BottomBar()
@@ -280,7 +281,7 @@ class MainActivity : ComponentActivity() {
     @Preview(showSystemUi = true)
     @Composable
     fun MainMenuViewPreview() {
-        TestrangeTheme {
+        MySusuTheme {
             MainMenuView()
         }
     }

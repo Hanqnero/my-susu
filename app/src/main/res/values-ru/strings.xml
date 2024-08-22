@@ -1,7 +1,6 @@
 <resources>
-    <string name="app_name" translatable="false">Мой ЮУрГУ</string>
-    <string name="title_activity_grades">Grades</string>
-    <string name="title_activity_coming_soon">ComingSoon</string>
+    <string name="title_activity_grades">Оценки</string>
+    <string name="title_activity_coming_soon">В Разработке</string>
     <string name="button_navbar_home">Сервисы</string>
     <string name="button_navbar_today">Сегодня</string>
     <string name="button_navbar_grades">Зачетка</string>
