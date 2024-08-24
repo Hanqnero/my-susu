@@ -8,13 +8,13 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -47,7 +47,6 @@ fun GradesRow(
             .fillMaxWidth()
             .heightIn(min = 50.dp, max = 120.dp)
             .background(Color.White, RoundedCornerShape(16.dp))
-            .shadow(elevation = 6.dp, shape = RoundedCornerShape(16.dp))
     ) {
         Row(
             modifier = Modifier
@@ -58,6 +57,7 @@ fun GradesRow(
             SubjectLabel(label, modifier = Modifier.weight(0.8f))
             SubjectGrade(grade, modifier = Modifier.weight(0.4f))
         }
+        Divider(color = Color.LightGray, thickness = 1.dp)
     }
 }
 
@@ -102,19 +102,7 @@ fun SubjectGrade(
 }
 
 @Composable
-fun SectionTitle(text: String) {
-    Text(
-        text = text,
-        fontWeight = FontWeight.Bold,
-        fontSize = 40.sp,
-        color = Color(0xFF767676),
-    )
-}
-
-@Preview(showSystemUi = true)
-@Composable
-fun GreetingPreview2() {
-    MySusuTheme {
+fun GradesScreen() {
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -132,5 +120,11 @@ fun GreetingPreview2() {
             GradesRow("Метрология", 0)
             GradesRow("Физическая культура", 0)
         }
+    }
+
+@Preview(showSystemUi = true)
+@Composable
+fun GreetingPreview() {
+    MySusuTheme {
     }
 }

@@ -1,6 +1,10 @@
 package ru.hanqnero.mysusu
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Done
 import androidx.compose.material.icons.outlined.Done
@@ -10,29 +14,27 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color.Companion.Gray
-import androidx.compose.ui.graphics.Color.Companion.White
+import androidx.compose.ui.graphics.Color.Companion.Red
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import ru.hanqnero.mysusu.activities.GradesScreen
+import ru.hanqnero.mysusu.activities.ServicesScreen
 
 class SusuNavBar {
-
     class NavBarItem(
         val title: String,
         val iconSelected: ImageVector,
         val iconDeselected: ImageVector,
     )
 
-
-    @Preview(showSystemUi = true)
     @Composable
-    fun NavBar() {
+    fun NavBar(
+        // content: @Composable BoxScope.() -> Unit
+    ) {
+
         var selectedItemIndex by rememberSaveable {
             mutableIntStateOf(0)
         }
@@ -75,62 +77,31 @@ class SusuNavBar {
                             contentDescription = item.title
                         )
                     },
-                        label = {Text(item.title)})
+                        label = { Text(item.title) })
                 }
             }
         }) { innerPadding ->
             Box(
                 modifier = Modifier.padding(innerPadding)
             ) {
-
-            }
-        }
-    }
-
-    @Composable
-    fun BottomBar() { //a row of button objects
-        BottomAppBar(
-            // Фон и высота панели
-            modifier = Modifier.height(56.dp), containerColor = White
-        ) {
-            // Содержимое панели
-            Row( //строка нижней панели
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceEvenly,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                IconButton(onClick = { /*TODO: Действие для брс кнопки */ }) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.hat), contentDescription = "БРС", tint = Gray
-                    )
-                }
-                IconButton(onClick = {}) {
-                    Icon(
-                        //TODO: imageVector = Icons.Default.Search,
-                        painter = painterResource(id = R.drawable.flash),
-                        contentDescription = "Последние новости",
-                        tint = Gray
-                    )
-                }
-                IconButton(onClick = {}) {
-                    Icon(
-                        //TODO: imageVector = Icons.Default.AccountCircle,
-                        painter = painterResource(id = R.drawable.schedule),
-                        contentDescription = "Расписание",
-                        tint = Gray
-                    )
-                }
-                IconButton(onClick = {
-                    // Переход на домашнюю страницу при нажатии на иконку
-                }) {
-                    Icon(
-                        //TODO: imageVector = Icons.Default.AccountCircle,
-                        painter = painterResource(id = R.drawable.homepage_icon),
-                        contentDescription = "Домашняя страница",
-                        tint = Gray
-                    )
+                when (selectedItemIndex) {
+                    0 -> ServicesScreen()
+                    1 -> ServicesScreen()
+                    2 -> ServicesScreen()
+                    3 -> GradesScreen()
                 }
             }
         }
     }
 }
+
+//    @Preview(showSystemUi = true)
+//    @Composable
+//    fun SusuNavBarPreview() {
+//        NavBar {
+//            Box(
+//                modifier = Modifier.fillMaxSize().background(Red),
+//            )
+//        }
+//    }
+//}
